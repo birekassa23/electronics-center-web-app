@@ -1,93 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List All Products</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>List All Products</title>
+    <!-- Bootstrap CDN for CSS and JS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Bootstrap CDN for CSS and JS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--  custom CSS -->
+    <link rel="stylesheet" href="css/index.html.css" />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
 
-  <!-- Optional custom CSS -->
-  <link rel="stylesheet" href="css/index.html.css" />
+  <body class="bg-light">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Bire Electronics</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="About.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                onclick="document.getElementById('id01').style.display='block'"
+                style="width: auto"
+              >
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-</head>
+    <div id="id01" class="modal">
+      <form
+        class="modal-content animate"
+        id="loginForm"
+        action="add.html"
+        method="post"
+      >
+        <div class="imgcontainer">
+          <img
+            src="../assets/images/userImage/default_avatar.png"
+            alt="Avatar"
+            class="avatar"
+          />
+        </div>
 
-<body class="bg-light">
+        <!-- Login Form -->
+        <div id="loginContent">
+          <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input
+              type="text"
+              placeholder="Enter Username"
+              name="uname"
+              required
+            />
 
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Bire Electronics</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="About.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Contact.html">Contact</a>
-          </li>
-        </ul>
+            <label for="psw"><b>Password</b></label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              name="psw"
+              required
+            />
+
+            <button type="submit">Login</button>
+            <label>
+              <input type="checkbox" checked="checked" name="remember" />
+              Remember me
+            </label>
+          </div>
+
+          <div class="container" style="background-color: #f1f1f1">
+            <button
+              type="button"
+              onclick="document.getElementById('id01').style.display='none'"
+              class="cancelbtn"
+            >
+              Cancel
+            </button>
+            <span class="psw"
+              >Forgot
+              <a href="#" onclick="toggleForgotPassword()">password?</a></span
+            >
+          </div>
+        </div>
+
+        <!-- Forgot Password Form -->
+        <div id="forgotPasswordContent" style="display: none">
+          <div class="container">
+            <label for="email"><b>Email</b></label>
+            <input
+              type="text"
+              placeholder="Enter your email"
+              name="email"
+              required
+            />
+
+            <button type="submit">Reset Password</button>
+          </div>
+
+          <div class="container" style="background-color: #f1f1f1">
+            <button
+              type="button"
+              onclick="document.getElementById('id01').style.display='none'"
+              class="cancelbtn"
+            >
+              Cancel
+            </button>
+            <span class="psw"
+              >Remembered your password?
+              <a href="#" onclick="toggleForgotPassword()">Login</a></span
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // Get the modal
+      var modal = document.getElementById("id01");
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // Toggle between login and forgot password form
+      function toggleForgotPassword() {
+        var loginContent = document.getElementById("loginContent");
+        var forgotPasswordContent = document.getElementById(
+          "forgotPasswordContent"
+        );
+
+        // Toggle visibility
+        if (loginContent.style.display === "none") {
+          loginContent.style.display = "block";
+          forgotPasswordContent.style.display = "none";
+        } else {
+          loginContent.style.display = "none";
+          forgotPasswordContent.style.display = "block";
+        }
+      }
+    </script>
+
+    <div class="container my-5">
+      <h1 class="text-center mb-4">Bire Electronics</h1>
+      <h2 class="text-center mb-4">You will get everything here!</h2>
+
+      <!-- Product Cards Container -->
+      <div
+        id="productCards"
+        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
+      >
+        <!-- Product Cards will be inserted here dynamically -->
       </div>
     </div>
-  </nav>
 
-  <div class="container my-5">
-    <h1 class="text-center mb-4">Bire Electronics</h1>
-    <h2 class="text-center mb-4">You will get everything here!</h2>
+    <script>
+      // Fetch all products
+      async function fetchProducts() {
+        try {
+          const response = await fetch("http://localhost:3000/api/products");
+          const products = await response.json();
+          const productCards = document.getElementById("productCards");
+          productCards.innerHTML = ""; // Clear existing cards
 
-    <!-- Product Cards Container -->
-    <div id="productCards" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <!-- Product Cards will be inserted here dynamically -->
-    </div>
+          products.forEach((product) => {
+            // Create a card for each product
+            const card = document.createElement("div");
+            card.classList.add("col");
 
-  </div>
+            card.innerHTML = `
+              <div class="card h-100 shadow-sm">
+                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                <div class="card-body">
+                  <h5 class="card-title">${product.name}</h5>
+                  <p class="card-text">$${product.price}</p>
+                  <p class="card-text">${product.description}</p>
+                  <a href="buy.html?productId=${product.id}" class="btn btn-success">Buy Now</a>
+                </div>
+              </div>
+            `;
 
-  <script>
-    // Fetch all products
-    async function fetchProducts() {
-      const response = await fetch("http://localhost:3000/api/products");
-      const products = await response.json();
-      const productCards = document.getElementById("productCards");
-      productCards.innerHTML = ""; // Clear existing cards
+            productCards.appendChild(card);
+          });
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      }
 
-      products.forEach(product => {
-        // Create a card for each product
-        const card = document.createElement("div");
-        card.classList.add("col");
-
-        card.innerHTML = `
-          <div class="card h-100 shadow-sm">
-            <img src="${product.image}" class="card-img-top" alt="${product.name}">
-            <div class="card-body">
-              <h5 class="card-title">${product.name}</h5>
-              <p class="card-text">$${product.price}</p>
-              <p class="card-text">${product.description}</p>
-              <a href="buy.html?productId=${product.id}" class="btn btn-success">Buy Now</a>
-            </div>
-          </div>
-        `;
-
-        productCards.appendChild(card);
-      });
-    }
-
-    // Call fetchProducts on page load
-    fetchProducts();
-  </script>
-
-</body>
-<footer>
+      // Call fetchProducts on page load
+      fetchProducts();
+    </script>
+  </body>
+  <footer>
     <div class="container">
-        <p class="text-center">Copyright &copy; Bire Electronics 2023</p>
+      <p class="text-center">Copyright &copy; Bire Electronics 2023</p>
     </div>
-</footer>
+  </footer>
 </html>
