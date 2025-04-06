@@ -1,0 +1,67 @@
+/* Custom styles for Update Product page */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  padding-top: 30px;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form .form-control {
+  border-radius: 5px;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Button styling for Add, List, Delete */
+.d-flex a {
+  width: 32%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 24px;
+  }
+
+  .d-flex a {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .form-control {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 14px;
+  }
+
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Product</title>
+
+    <!-- Bootstrap CSS (for responsive design) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="update.html.css" />
+  </head>
+
+  <body>
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Update Product</h2>
+
+      <!-- Update Form -->
+      <form id="updateForm" class="p-4 shadow rounded bg-white">
+        <div class="mb-3">
+          <label for="productId" class="form-label">Enter Product ID</label>
+          <input
+            type="number"
+            id="productId"
+            class="form-control"
+            placeholder="Product ID"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Product Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="Product Name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input
+            type="number"
+            id="price"
+            class="form-control"
+            placeholder="Price"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            id="description"
+            class="form-control"
+            placeholder="Description"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" >
+          Update Product
+        </button>
+      </form>
+
+      <!-- Button Group -->
+      <div class="d-flex justify-content-between mt-4">
+        <a href="add.html" class="btn btn-secondary">Add New Product</a>
+        <a href="list.html" class="btn btn-secondary">List All Products</a>
+        <a href="delete.html" class="btn btn-danger">Delete Product</a>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js for responsive features -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script to handle fetching and updating product details -->
+    <script>
+      let timeout;
+
+      // Debounced function to fetch product details
+      document
+        .getElementById("productId")
+        .addEventListener("input", async (e) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(async () => {
+            const productId = e.target.value;
+            if (productId) {
+              const response = await fetch(
+                `http://localhost:3000/api/products/${productId}`
+              );
+              const product = await response.json();
+
+              if (product && product.id) {
+                // Populate the form with the product details
+                document.getElementById("name").value = product.name;
+                document.getElementById("price").value = product.price;
+                document.getElementById("description").value =
+                  product.description;
+
+                // Enable the update button if the product exists
+                document.querySelector(
+                  "button[type='submit']"
+                ).disabled = false;
+              } else {
+                // Reset the form and disable the button if product not found
+                document.getElementById("name").value = "";
+                document.getElementById("price").value = "";
+                document.getElementById("description").value = "";
+                document.querySelector("button[type='submit']").disabled = true;
+                alert("Product not found.");
+              }
+            } else {
+              // Reset the form and disable the button if no product ID entered
+              document.getElementById("name").value = "";
+              document.getElementById("price").value = "";
+              document.getElementById("description").value = "";
+              document.querySelector("button[type='submit']").disabled = true;
+            }
+          }, 500); // Adjust debounce delay as needed (500ms)
+        });
+
+      // Update product functionality
+      document
+        .getElementById("updateForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const productId = document.getElementById("productId").value;
+          const name = document.getElementById("name").value;
+          const price = document.getElementById("price").value;
+          const description = document.getElementById("description").value;
+
+          const response = await fetch(
+            `http://localhost:3000/api/products/${productId}`,
+            {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, price, description }),
+            }
+          );
+
+          const data = await response.json();
+          alert("Product updated: " + data.id);
+        });
+    </script>
+  </body>
+</html>

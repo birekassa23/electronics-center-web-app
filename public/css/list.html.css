@@ -1,0 +1,91 @@
+/* Custom styles for the product list page */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f9;
+}
+
+.navbar {
+  margin-bottom: 30px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+
+.table td img {
+  max-width: 100px;
+}
+
+.btn-sm {
+  font-size: 12px;
+  padding: 6px 12px;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 10px;
+  text-align: center;
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+  .table {
+    font-size: 12px;
+  }
+
+  .table td img {
+    max-width: 80px;
+  }
+
+  .btn-sm {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .container {
+    margin: 0 15px;
+  }
+}
